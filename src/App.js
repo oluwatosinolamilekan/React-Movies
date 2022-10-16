@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import MovieList from './MovieList';
 import './App.css';
-const API_URL = ' http://www.omdbapi.com/?apikey=de625ec';
+const API_URL = ' https://www.omdbapi.com/?apikey=de625ec';
 
 
 const App = () => {
@@ -20,7 +20,8 @@ const App = () => {
 
     const handleChange = (e) => {
       setSearchTerm(e.target.value);
-      searchMovies(e.target.value)
+      let title  = e.target.value === "" && "Batman";
+      searchMovies(title)
     }
   return (
     <div className="app">
