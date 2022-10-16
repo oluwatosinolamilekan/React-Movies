@@ -1,8 +1,6 @@
-import logo from './logo.svg';
 import { useState, useEffect } from 'react';
-import MovieCard from './MovieCard';
+import MovieList from './MovieList';
 import './App.css';
-import SearchIcon from './search.svg';
 const API_URL = ' http://www.omdbapi.com/?apikey=de625ec';
 
 
@@ -19,6 +17,11 @@ const App = () => {
     useEffect(() => {
       searchMovies("Batman");
     }, []);
+
+    const handleChange = (e) => {
+      setSearchTerm(e.target.value);
+      searchMovies(e.target.value)
+    }
   return (
     <div className="app">
        <h1>Movies</h1>
@@ -27,32 +30,15 @@ const App = () => {
           <input
             placeholder='Search for movies'
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={handleChange}
           />
-          <img
+          {/* <img
           src={SearchIcon}
           alt="search"
           onClick={() => searchMovies(searchTerm)}
-          /> 
+          />  */}
        </div>
-        {
-          movies?.length > 0 
-          ? (
-            <div className='container'>
-             {movies.map( (movie) => (
-               <MovieCard movie={movie} key={movie.imdbID}
-               />
-             ))}
-           </div>
-          )
-          : 
-          (
-            <div className='empty'>
-                <h2>No movies found.</h2>
-            </div>
-          )
-        }
-    
+        <MovieList movies={movies}/>
     </div>
   );
 }
